@@ -1,0 +1,2 @@
+  - pipeline.id: mysql
+    path.config: "/usr/share/logstash/config/logstash-mysql.conf"

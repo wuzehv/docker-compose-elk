@@ -1,0 +1,38 @@
+version: '2.4'
+
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: elasticsearch:7.9.3
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+
+  kibana:
+    container_name: kibana
+    image: kibana:7.9.3
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    container_name: logstash
+    build: ./logstash
+    ports:
+      - 9600:9600
+    depends_on:
+      - elasticsearch
+    external_links:
+      - mysql:mysql
+    networks:
+      - default
+      - mysqlnet
+
+# 使用外部已有网络，连接mysql；如果mysql不使用docker，logstash-mysql.conf的mysql连接就行了
+networks:
+  mysqlnet:
+    external:
+      name: docker-lnmp_code-network
