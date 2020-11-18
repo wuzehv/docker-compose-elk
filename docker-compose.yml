@@ -27,6 +27,9 @@ services:
       - elasticsearch
     external_links:
       - mysql:mysql
+    volumes:
+      - ./logstash/config:/usr/share/logstash/config
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
     networks:
       - default
       - mysqlnet

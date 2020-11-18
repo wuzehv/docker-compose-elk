@@ -11,3 +11,5 @@
 logstash连接docker下的mysql，修改docker-compose.yml里面的网卡
 
 logstash连接其他环境的mysql，修改logstash-mysql.conf连接
+
+**elk对配置有一定要求，酌情调高docker配置**
